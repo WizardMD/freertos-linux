@@ -1,3 +1,3 @@
 [submodule "freertos"]
 	path = freertos
-	url = git@github.com:sean93park/freertos.git
+	url = https://github.com/WizardMD/freertos.git
