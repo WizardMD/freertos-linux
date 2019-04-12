@@ -112,7 +112,7 @@
 #define configUSE_CO_ROUTINES           1
 #define configUSE_MUTEXES               1
 #define configUSE_COUNTING_SEMAPHORES   1
-#define configUSE_ALTERNATIVE_API       1
+#define configUSE_ALTERNATIVE_API       0
 #define configUSE_RECURSIVE_MUTEXES     1
 #define configCHECK_FOR_STACK_OVERFLOW  0
                                 /* Do not use this option on the PC port. */
