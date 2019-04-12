@@ -12,18 +12,23 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-OUTPUT_ROOT     := "build"
+BUILDTYPE		?= "debug"
 
-.phony: all clean arm
+ifeq ($(BUILDTYPE),release)
+else
+  BUILDTYPE = debug
+endif
+
+OUTPUT_ROOT     := "build/x86-$(BUILDTYPE)"
+CMAKE_FOLDER    := "./$(OUTPUT_ROOT)/cmake"
+CMAKE_DEFINES   := "-DCMAKE_TOOLCHAIN_FILE=./cmake/toolchain/toolchain_osx-i386.cmake"
+CMAKE_TYPE      := "-DCMAKE_BUILD_TYPE=$(BUILDTYPE)"
+
+.phony: all
+
 
 all:
-	make -f Makefile.x86
-
-arm:
-	make -f Makefile.arm
-
-osx:
-	make -f Makefile_osx.x86
-
-clean:
-	rm -rf $(OUTPUT_ROOT)
+	git submodule update --recursive
+	mkdir -p $(CMAKE_FOLDER)
+	cmake -B$(CMAKE_FOLDER) -H./ $(CMAKE_DEFINES) $(CMAKE_TYPE)
+	make -C $(CMAKE_FOLDER)
